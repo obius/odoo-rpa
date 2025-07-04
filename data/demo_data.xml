@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Hello World Messages -->
+        <record id="hello_world_demo_1" model="hello.world">
+            <field name="name">John Doe</field>
+            <field name="greeting_type">hello</field>
+            <field name="is_active">True</field>
+        </record>
+
+        <record id="hello_world_demo_2" model="hello.world">
+            <field name="name">Jane Smith</field>
+            <field name="greeting_type">hi</field>
+            <field name="is_active">True</field>
+        </record>
+
+        <record id="hello_world_demo_3" model="hello.world">
+            <field name="name">Bob Johnson</field>
+            <field name="greeting_type">greetings</field>
+            <field name="is_active">True</field>
+        </record>
+
+        <record id="hello_world_demo_4" model="hello.world">
+            <field name="name">Alice Brown</field>
+            <field name="greeting_type">welcome</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="hello_world_demo_5" model="hello.world">
+            <field name="name">Charlie Wilson</field>
+            <field name="greeting_type">hello</field>
+            <field name="is_active">True</field>
+        </record>
+    </data>
+</odoo>

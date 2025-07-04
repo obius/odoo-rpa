@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="hello_world_tree_view" model="ir.ui.view">
+            <field name="name">hello.world.tree</field>
+            <field name="model">hello.world</field>
+            <field name="arch" type="xml">
+                <tree string="Hello World Messages">
+                    <field name="name"/>
+                    <field name="greeting_type"/>
+                    <field name="message"/>
+                    <field name="is_active"/>
+                    <field name="created_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="hello_world_form_view" model="ir.ui.view">
+            <field name="name">hello.world.form</field>
+            <field name="model">hello.world</field>
+            <field name="arch" type="xml">
+                <form string="Hello World Message">
+                    <header>
+                        <button name="action_toggle_active" type="object" 
+                                string="Toggle Active" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_toggle_active" type="object"
+                                    class="oe_stat_button" icon="fa-power-off">
+                                <field name="is_active" widget="boolean_toggle"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="Enter your name..."/>
+                                <field name="greeting_type"/>
+                            </group>
+                            <group>
+                                <field name="created_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="message" readonly="1" 
+                                   widget="text" class="oe_inline"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="hello_world_search_view" model="ir.ui.view">
+            <field name="name">hello.world.search</field>
+            <field name="model">hello.world</field>
+            <field name="arch" type="xml">
+                <search string="Search Hello World Messages">
+                    <field name="name"/>
+                    <field name="greeting_type"/>
+                    <field name="message"/>
+                    <filter name="active" string="Active" domain="[('is_active', '=', True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('is_active', '=', False)]"/>
+                    <separator/>
+                    <filter name="today" string="Today" 
+                            domain="[('created_date', '>=', datetime.datetime.now().strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_greeting_type" string="Greeting Type" 
+                                context="{'group_by': 'greeting_type'}"/>
+                        <filter name="group_by_active" string="Active Status" 
+                                context="{'group_by': 'is_active'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="hello_world_action" model="ir.actions.act_window">
+            <field name="name">Hello World Messages</field>
+            <field name="res_model">hello.world</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="hello_world_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Hello World message!
+                </p>
+                <p>
+                    Click the "Create" button to add a new hello world message.
+                    Enter your name and choose a greeting type to see your personalized message.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="hello_world_main_menu" name="Hello World App" sequence="100"/>
+        
+        <menuitem id="hello_world_menu" name="Hello World Messages" 
+                  parent="hello_world_main_menu" action="hello_world_action" sequence="10"/>
+    </data>
+</odoo>
